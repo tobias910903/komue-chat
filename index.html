@@ -73,7 +73,8 @@
 
 <script type="text/javascript">
     var userName = '';
-    var socket = io('http://81.70.145.171:80');
+    // var socket = io('http://81.70.145.171:80');
+    var socket = io('http://127.0.0.1:80');
 
     $(function () {
         show_prompt();
@@ -87,7 +88,7 @@
         });
 
         socket.on('gg', function (text) {
-            $('#message_box').append("<li><span class='date'>" + new Date() + '</span> ' + text + "</li>");
+            $('#message_box').prepend("<li><span class='date'>" + new Date() + '</span> ' + text + "</li>");
         });
 
         socket.on('userNum', function (num) {
