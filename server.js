@@ -6,6 +6,10 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/play', function (req, res) {
+    res.sendFile(__dirname + '/play.html');
+});
+
 app.get('/api', function (req, res) {
     io.emit('gg', '服务器发来了一个数据~');
 });
@@ -25,6 +29,6 @@ io.on('connection', function (socket) {
 });
 
 
-http.listen(80, '0.0.0.0', function () {
-    console.log('端口: 80');
+http.listen(8011, '0.0.0.0', function () {
+    console.log('端口: 8011');
 });
