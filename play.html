@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
 </head>
-<body>
+<body onbeforeunload="return leave()">
+
+<p><button id="startEnter">开始报名</button></p>
+<p><button id="join">加入活动</button></p>
 
 <p><button id="chatGroup">群发消息</button></p>
-<p><button id="start">START</button></p>
-<p><button id="join">加入活动</button></p>
+
 <p><button id="logout">手动退出页面</button></p>
 <p><button id="reset">清空用户池</button></p>
 
@@ -47,14 +49,29 @@
             console.log("playerList == ", JSON.stringify(e));
         })
 
+        socket.on('isStart', function(e){
+            console.log("isStart == ", JSON.stringify(e));
+        })
+
+        socket.on('msgPlayer', function(e){
+            if(e === 'shortInfo'){
+                console.log("shortInfo 简短的自我介绍 == ", e);
+            }
+        })
+
         socket.on('msg', function(e){
             console.log("msg == ", e)
-            if(e == 'playerFull'){
+            if(e === 'playerFull'){
                 console.log("人员已满")
             }
 
-            if(e == 'start'){
-                console.log("活动开始")
+            if(e === 'startEnter'){
+                console.log("活动报名开始")
+                window.location.reload()
+            }
+
+            if(e === 'startPlay'){
+                console.log("====== 活动开始 ======")
             }
         })
 
@@ -83,9 +100,9 @@
             socket.emit('logout', token);
         })
 
-        // start
-        $("#start").click(function(){
-            socket.emit('cmd', 'start');
+        // startEnter
+        $("#startEnter").click(function(){
+            socket.emit('cmd', 'startEnter');
         })
 
         // reset
@@ -93,6 +110,11 @@
             socket.emit('cmd', 'reset');
         })
     });
+
+    // 刷新页面
+    function leave(){
+        socket.emit('logout', token);
+    }
 </script>
 </body>
 </html>
