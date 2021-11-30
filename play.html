@@ -53,12 +53,6 @@
             console.log("isStart == ", JSON.stringify(e));
         })
 
-        socket.on('msgPlayer', function(e){
-            if(e === 'shortInfo'){
-                console.log("shortInfo 简短的自我介绍 == ", e);
-            }
-        })
-
         socket.on('msg', function(e){
             console.log("msg == ", e)
             if(e === 'playerFull'){
@@ -72,6 +66,10 @@
 
             if(e === 'startPlay'){
                 console.log("====== 活动开始 ======")
+            }
+
+            if(e === 'shortInfo'){
+                console.log("shortInfo 简短的自我介绍 == ", e);
             }
         })
 
