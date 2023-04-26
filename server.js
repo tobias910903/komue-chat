@@ -6,10 +6,6 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/play', function (req, res) {
-    res.sendFile(__dirname + '/play.html');
-});
-
 app.get('/api', function (req, res) {
     io.emit('gg', '服务器发来了一个数据~');
 });
